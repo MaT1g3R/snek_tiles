@@ -1,3 +1,21 @@
+"""
+snek_tiles, a simple Python game to hit falling notes
+Copyright (C) 2017 MaT1g3R
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
 from random import random
 from time import sleep
 
@@ -78,7 +96,9 @@ def show_help(screen):
         'Try to catch the notes falling down from the four tracks.',
         'Press H, J, K, L keys when the notes arrive at the grey line.',
         'You lose one health per missed notes, good luck.',
-        'Press Enter to start, press any other keys to quit.'
+        'Press Enter to start, press any other keys to quit.',
+        'This program is licensed under GPL v3.0,',
+        'you should have recived a LICENSE file with the program.'
     )
     font = pygame.font.Font(None, 30)
     while True:
@@ -97,7 +117,7 @@ def show_help(screen):
             rect = text.get_rect(center=(width / 2, y))
             screen.blit(text, rect)
             y += 20
-            if i == 2:
+            if i in (2, 3):
                 y += 20
         pygame.display.flip()
 
