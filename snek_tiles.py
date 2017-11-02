@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from random import random
 from time import sleep
+from sys import argv
 
 import pygame
 
@@ -34,7 +35,7 @@ orange = 226, 115, 45
 white = 227, 231, 234
 
 
-def process_tracks(screen, tracks, pressed):
+def process_tracks(screen, tracks, pressed, speed=1):
     health_delta = 0
     score_delta = 0
     for i, track in enumerate(tracks):
@@ -51,7 +52,7 @@ def process_tracks(screen, tracks, pressed):
                     continue
             rect = [x + 20, y, 60, 50]
             pygame.draw.ellipse(screen, light_blue, rect, 5)
-            tracks[i][j] += 1
+            tracks[i][j] += speed
         if (not track or track[-1] > 50) and random() < 0.0005:
             tracks[i].append(0)
     return health_delta, score_delta
@@ -122,7 +123,7 @@ def show_help(screen):
         pygame.display.flip()
 
 
-def main(display_help=True):
+def main(display_help=True, speed=1):
     screen = pygame.display.set_mode(size)
     pygame.init()
     font = pygame.font.Font(None, 30)
@@ -148,12 +149,14 @@ def main(display_help=True):
                     pressed[3] = True
                 elif health <= 0:
                     if key == pygame.K_RETURN:
-                        main(False)
+                        main(False, speed)
                     else:
                         exit(0)
         screen.fill(black)
         if health > 0:
-            health_delta, score_delta = process_tracks(screen, tracks, pressed)
+            health_delta, score_delta = process_tracks(
+                    screen, tracks, pressed, speed
+            )
             score += score_delta
             health += health_delta
             render_text(screen, font, score, health)
@@ -165,4 +168,8 @@ def main(display_help=True):
 
 
 if __name__ == '__main__':
-    main()
+    if len(argv) == 2:
+        speed = int(argv[1])
+    else:
+        speed = 1
+    main(True, speed)
