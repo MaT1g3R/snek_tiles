@@ -170,6 +170,9 @@ def main(display_help=True, speed=1):
 if __name__ == '__main__':
     if len(argv) == 2:
         speed = int(argv[1])
+        if speed < 1:
+            print('Please provide a speed greater than 1.')
+            exit(1)
     else:
         speed = 1
     main(True, speed)

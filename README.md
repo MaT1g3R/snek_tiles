@@ -28,5 +28,12 @@ To run the game:
 $ python3 snek_tiles.py
 ``
 
+You can provide a command line argument for the note speed(default is 1, larger number is faster):
+
+``
+$ python3 snek_tiles.py 10
+``
+
+
 # License
 This program is licensed under GPL v3.0, see [LICENSE](https://github.com/MaT1g3R/snek_tiles/blob/master/LICENSE) file for details.
